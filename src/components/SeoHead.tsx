@@ -30,7 +30,7 @@ function getSiteOrigin(): string {
     return SITE_URL.replace(/\/$/, "");
   }
 
-  return window.location.origin;
+  return window.location.origin + "/barg-dak";
 }
 
 function upsertMeta(name: string, content: string): void {
