@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* Smooth scroll for anchor navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure root fills the viewport without any width constraints */
+#root {
+  width: 100%;
+  min-height: 100svh;
+}
