@@ -96,9 +96,16 @@ const routes: RouteObject[] = [
   },
 ];
 
-const router = createBrowserRouter(routes, {
-  basename: "/barg-dak",
-});
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const router = createBrowserRouter(
+  routes,
+  basePath
+    ? {
+        basename: basePath,
+      }
+    : undefined,
+);
 
 // ---------------------------------------------------------------------------
 // Public exports

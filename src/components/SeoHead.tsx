@@ -7,6 +7,7 @@ interface SeoHeadProps {
 }
 
 const SITE_URL = import.meta.env.VITE_SITE_URL;
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const SEO_COPY = {
   nl: {
@@ -27,10 +28,16 @@ const SEO_COPY = {
 
 function getSiteOrigin(): string {
   if (SITE_URL) {
-    return SITE_URL.replace(/\/$/, "");
+    const normalizedSiteUrl = SITE_URL.replace(/\/$/, "");
+
+    if (BASE_PATH && !normalizedSiteUrl.endsWith(BASE_PATH)) {
+      return `${normalizedSiteUrl}${BASE_PATH}`;
+    }
+
+    return normalizedSiteUrl;
   }
 
-  return window.location.origin + "/barg-dak";
+  return `${window.location.origin}${BASE_PATH}`;
 }
 
 function upsertMeta(name: string, content: string): void {

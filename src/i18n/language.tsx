@@ -9,6 +9,21 @@ interface LanguageContextValue {
 
 const STORAGE_KEY = "barg-language";
 
+function getNormalizedPathname(pathname: string): string {
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+  if (!basePath) {
+    return pathname;
+  }
+
+  if (!pathname.startsWith(basePath)) {
+    return pathname;
+  }
+
+  const stripped = pathname.slice(basePath.length);
+  return stripped.length > 0 ? stripped : "/";
+}
+
 const LanguageContext = createContext<LanguageContextValue | undefined>(
   undefined,
 );
@@ -19,7 +34,7 @@ export function LanguageProvider({
   children: React.ReactNode;
 }): React.ReactElement {
   const [language, setLanguage] = useState<Language>(() => {
-    const pathname = window.location.pathname;
+    const pathname = getNormalizedPathname(window.location.pathname);
 
     if (pathname.startsWith("/en")) {
       return "en";
