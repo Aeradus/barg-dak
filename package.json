@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "postbuild": "cp dist/index.html dist/404.html",
+    "build:docs": "pnpm build && rm -rf docs && mkdir -p docs && cp -R dist/. docs/ && touch docs/.nojekyll",
     "lint": "eslint .",
     "preview": "vite preview"
   },
